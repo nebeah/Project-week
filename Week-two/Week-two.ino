@@ -13,13 +13,15 @@ int in4 = A4;
 
 int rightEncoder = 2;
 int leftEncoder = 1;
-
 int rightSteps = 0;
 int leftSteps = 0;
 struct State {
     bool right = false;
     bool left = false;
 } prevState, currentState;
+
+int rightSensor = 12;
+const float CIRCUMFERENCE = 0.207;
 
 void setup() {
     pinMode(enA, OUTPUT);
@@ -32,6 +34,8 @@ void setup() {
     pinMode(rightEncoder, INPUT);
     pinMode(leftEncoder, INPUT);
 
+    pinMode(rightSensor, INPUT);
+
     analogWrite(enA, 255);
     analogWrite(enB, 255);
 
@@ -39,14 +43,7 @@ void setup() {
 
     lcd.begin(16, 2);
     lcd.setCursor(0, 0);
-    lcd.print("Right: ");
-    lcd.setCursor(7, 0);
-    lcd.print(rightSteps);
-
-    lcd.setCursor(0, 1);
-    lcd.print("Left: ");
-    lcd.setCursor(6, 1);
-    lcd.print(leftSteps);
+    lcd.print("Distance: ");
 
     currentState.right = digitalRead(rightEncoder);
     currentState.left = digitalRead(leftEncoder);
@@ -54,20 +51,23 @@ void setup() {
 }
 
 void loop() {
+    digitalRead(rightSensor);
     currentState.right = digitalRead(rightEncoder);
     currentState.left = digitalRead(leftEncoder);
 
     if (currentState.right && !prevState.right) {
         rightSteps++;
-        lcd.setCursor(7, 0);
-        lcd.print(rightSteps);
     }
     
     if (currentState.left && !prevState.left) {
         leftSteps++;
-        lcd.setCursor(6, 1);
-        lcd.print(leftSteps);
     }
+
+    // Calculate the distance travelled by the right wheel
+    int rotations = rightSteps / 20;
+    int distance = rotations * CIRCUMFERENCE;
+    lcd.setCursor(0, 1);
+    lcd.print(distance);
 
     prevState = currentState;
 }
