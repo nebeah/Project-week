@@ -1,0 +1,81 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\graphicspath{{Images/}}
+
+\begin{document}
+    \begin{titlepage}
+        \begin{flushleft}
+            \includegraphics[width=0.3\textwidth]{UNM logo.png} 
+        \end{flushleft}
+        \vspace{3cm}
+        
+        \begin{center}
+            {\Huge \bfseries Log Book} 
+            \par \vspace{\baselineskip}
+            {\Large Project Weeks} 
+            
+            \vfill
+            
+            {Mohamed Nabeeh Ibrahim} \par
+            {20786034}
+        \end{center}
+    \end{titlepage}
+
+    \section{Week One}
+    \subsection{Day One}
+    Built the H-Bridge motor controller by referring to the circuit diagram given in the lab sheet. The components used were breadboard, DC motor MM10,
+    4 slide switches and jumper wires.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{H-Bridge motor driver on breadboard.jpg}
+            \caption{H-Bridge motor driver on breadboard}
+            \label{fig:H-Bridge breadboard}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{H-Bridge in tinkercad.png}
+            \caption{H-Bridge in tinkercad}
+            \label{fig:H-Bridge tinkercad}
+        \end{subfigure}
+        \caption{}
+    \end{figure}
+
+    Before testing the circuit using the (\ref{fig:H-Bridge breadboard}) power supply, tested the design in tinkercad by modelling the circuit and running a simulation.
+    The simulation was a success so connected the terminals of the power supply to the breadboard and set the power supply to output 3v and 0.1A,
+    then turned S1 and S3 on. The motor was spinning as expected so turned off S1 and S3, then turned on S2 and S4. The motor started spinning
+    in the opposite direction hence the first task was completed.
+
+    Afterwards started to work on the robot car. Attached all four motors to the body and attached all of the wheels to the motors.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\textwidth]{Motor assembly.jpg}
+        \caption{Motor assembly}
+        \label{fig:Motor assembly}
+    \end{figure}
+
+    \subsection{Day Two}
+    Connected the wires of the motors to the necessary output terminals of the L298N motor driver. Then connected the battery positive terminal
+    to the 12v terminal of the motor driver and the battery negative terminal to the ground terminal of the motor driver. Afterwards
+    made connections between the ground and 5v of the motor driver and the arduino. After that connected the enA and enB terminals on the motor driver
+    to the A1 and A2 terminals on the arduino. Then connected in1, in2, in3 and in4 on the motor driver to digital pins 2, 3, 4 and 5 on the arduino respectively.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\textwidth]{Motor driver connections.jpg}
+        \caption{Motor driver connections}
+        \label{fig:Driver connections}
+    \end{figure}
+
+    Wrote the code to display the elapsed time on the LCD display and to drive the car forwards and uploaded it to the arduino.
+
+    When testing the car, only the motors on one side were spinning. Learned that since the LCD display is mounted onto the arduino, 
+    not all of the digital pins are available. Hence remade some of the connections. Now in1, in2, in3 and in4 on the motor driver were connected to
+    digital pins 13, 12, 11 and 4 on the arduino. Modified the code as necessary and uploaded it to the arduino. The car was now working as intended.
+\end{document}

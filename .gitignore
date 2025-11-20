@@ -1,2 +1,6 @@
 .pio/
 .vscode/
+Logbook/*
+!Logbook/logbook.tex
+!Logbook/logbook.pdf
+!Logbook/Images/
