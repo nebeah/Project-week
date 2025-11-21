@@ -86,10 +86,6 @@ void turnLeft() {
     setSpeed(maxSpeed, defaultSpeed);
 }
 
-void moveForward() {
-    setSpeed(defaultSpeed, defaultSpeed);
-}
-
 bool rotating = false;
 enum Turning {
     left,
@@ -132,12 +128,6 @@ void setup() {
     pinMode(Pins::IR::left, INPUT);
 
     lcd.begin(16, 2);
-
-    digitalWrite(Pins::MotorDriver::in1, HIGH); // right motor go forwards
-    digitalWrite(Pins::MotorDriver::in2, LOW);
-
-    digitalWrite(Pins::MotorDriver::in3, HIGH); //left motor go forwards
-    digitalWrite(Pins::MotorDriver::in4, LOW);
 }
 
 void loop() {
