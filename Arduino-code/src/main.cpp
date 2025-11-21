@@ -5,10 +5,11 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7); // Digital pins 10 to 4 are occupied by LCD
 
 namespace Pins {
     namespace MotorDriver {
-        constexpr int enA = 3;
-        constexpr int enB = 11;
+        constexpr int enA = 3; // right side motors
         constexpr int in1 = 1;
         constexpr int in2 = 2;
+
+        constexpr int enB = 11; // left side motors
         constexpr int in3 = 12;
         constexpr int in4 = 13;
     }
@@ -21,12 +22,13 @@ namespace Pins {
     namespace IR {
         constexpr int right = A1;
         constexpr int left = A2;
+        constexpr int center = A5;
     }
 }
 
 constexpr int defaultSpeed = 100;
 constexpr int maxSpeed = defaultSpeed * 2;
-constexpr int minSpeed = defaultSpeed * 0.5;
+constexpr int minSpeed = defaultSpeed * 0.6;
 
 // The analog threshold above which the IR sensors can be considered to be ON
 constexpr int IRthreshold = 100;
@@ -64,19 +66,53 @@ void setSpeed(int rightSpeed, int leftSpeed) {
     analogWrite(Pins::MotorDriver::enB, leftSpeed);
 }
 
-void followLine() {
-    int rightIR = analogRead(Pins::IR::right);
-    int leftIR = analogRead(Pins::IR::left);
+void turnRight() {
+    digitalWrite(Pins::MotorDriver::in1, LOW); // right motor go bacwards
+    digitalWrite(Pins::MotorDriver::in2, HIGH);
 
+    digitalWrite(Pins::MotorDriver::in3, HIGH); //left motor go backwards
+    digitalWrite(Pins::MotorDriver::in4, LOW);
+
+    setSpeed(defaultSpeed, maxSpeed);
+}
+
+void turnLeft() {
+    digitalWrite(Pins::MotorDriver::in1, HIGH); // right motor go forwards
+    digitalWrite(Pins::MotorDriver::in2, LOW);
+
+    digitalWrite(Pins::MotorDriver::in3, LOW); //left motor go backwards
+    digitalWrite(Pins::MotorDriver::in4, HIGH);
+
+    setSpeed(maxSpeed, defaultSpeed);
+}
+
+void moveForward() {
     setSpeed(defaultSpeed, defaultSpeed);
+}
 
-    if (rightIR < IRthreshold && leftIR > IRthreshold) {
-        setSpeed(minSpeed, maxSpeed);
-        Serial.println("move right");
+bool rotating = false;
+enum Turning {
+    left,
+    right
+};
 
-    } else if (rightIR > IRthreshold && leftIR < IRthreshold) {
-        setSpeed(maxSpeed, minSpeed);
-        Serial.println("move left");
+Turning turning = left;
+
+void followLine() {
+    // Check if the the sensors see a line
+    bool rightIR = analogRead(Pins::IR::right) < IRthreshold;
+    bool leftIR = analogRead(Pins::IR::left) < IRthreshold;
+
+    if (turning == left) {
+        if (rightIR) {
+            turning = right;
+            turnRight();
+        }
+    } else if (turning == right) {
+        if (leftIR) {
+            turning = left;
+            turnLeft();
+        }
     }
 }
 
@@ -97,10 +133,10 @@ void setup() {
 
     lcd.begin(16, 2);
 
-    // Set motors to go forwards
-    digitalWrite(Pins::MotorDriver::in1, HIGH);
+    digitalWrite(Pins::MotorDriver::in1, HIGH); // right motor go forwards
     digitalWrite(Pins::MotorDriver::in2, LOW);
-    digitalWrite(Pins::MotorDriver::in3, HIGH);
+
+    digitalWrite(Pins::MotorDriver::in3, HIGH); //left motor go forwards
     digitalWrite(Pins::MotorDriver::in4, LOW);
 }
 
