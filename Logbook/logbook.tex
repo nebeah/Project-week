@@ -14,14 +14,15 @@
         \vspace{3cm}
         
         \begin{center}
-            {\Huge \bfseries Log Book} 
+            {\Huge \bfseries Log Book}
             \par \vspace{\baselineskip}
-            {\Large Project Weeks} 
-            
+
+            {\Large Project Weeks}
             \vfill
             
-            {Mohamed Nabeeh Ibrahim} \par
-            {20786034}
+            Mohamed Nabeeh Ibrahim
+            \par
+            20786034
         \end{center}
     \end{titlepage}
 
@@ -35,18 +36,18 @@
         \begin{subfigure}[h]{0.3\textwidth}
             \includegraphics[width=\textwidth]{H-Bridge motor driver on breadboard.jpg}
             \caption{H-Bridge motor driver on breadboard}
-            \label{fig:H-Bridge breadboard}
+            \label{fig:h-bridge breadboard}
         \end{subfigure}
         \hspace{2cm}
         \begin{subfigure}[h]{0.3\textwidth}
             \includegraphics[width=\textwidth]{H-Bridge in tinkercad.png}
             \caption{H-Bridge in tinkercad}
-            \label{fig:H-Bridge tinkercad}
+            \label{fig:h-bridge tinkercad}
         \end{subfigure}
         \caption{}
     \end{figure}
 
-    Before testing the circuit using the (\ref{fig:H-Bridge breadboard}) power supply, tested the design in tinkercad by modelling the circuit and running a simulation.
+    Before testing the circuit using the power supply, tested the design in tinkercad by modelling the circuit and running a simulation.
     The simulation was a success so connected the terminals of the power supply to the breadboard and set the power supply to output 3v and 0.1A,
     then turned S1 and S3 on. The motor was spinning as expected so turned off S1 and S3, then turned on S2 and S4. The motor started spinning
     in the opposite direction hence the first task was completed.
@@ -57,7 +58,7 @@
         \centering
         \includegraphics[width=0.3\textwidth]{Motor assembly.jpg}
         \caption{Motor assembly}
-        \label{fig:Motor assembly}
+        \label{fig:motor assembly}
     \end{figure}
 
     \subsection{Day Two}
@@ -70,7 +71,7 @@
         \centering
         \includegraphics[width=0.3\textwidth]{Motor driver connections.jpg}
         \caption{Motor driver connections}
-        \label{fig:Driver connections}
+        \label{fig:driver connections}
     \end{figure}
 
     Wrote the code to display the elapsed time on the LCD display and to drive the car forwards and uploaded it to the arduino.
@@ -78,4 +79,90 @@
     When testing the car, only the motors on one side were spinning. Learned that since the LCD display is mounted onto the arduino, 
     not all of the digital pins are available. Hence remade some of the connections. Now in1, in2, in3 and in4 on the motor driver were connected to
     digital pins 13, 12, 11 and 4 on the arduino. Modified the code as necessary and uploaded it to the arduino. The car was now working as intended.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\textwidth]{Final product for week one.jpg}
+        \caption{Final car design for week one}
+        \label{fig:final design week one}
+    \end{figure}
+
+    \subsection{Day Three}
+    Cleaned up the wires on our car. Cut off some of the excess wires and attached all the components to the car using double sided tape.
+    Additionally attached the ultrasound sensor to the front of the car however did not connect any wires to it.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\textwidth]{Final product wires cleaned up.jpg}
+        \caption{Wires managed and ultrasound sensor attached}
+        \label{fig:ultrasound sensor attached}
+    \end{figure}
+
+    Afterwards started to work on the light sensor circuit for project week 2. Followed the circuit diagram and built the amplifier circuit on the breadboard. But
+    during testing there was no output voltage. After inspection found that one of the wires was causing a short circuit so redid the wiring
+    and tested the circuit again. This time the circuit works completely fine and gave an expected output voltage.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\textwidth]{Amplifier circuit.jpg}
+        \caption{IR amplifier circuit}
+        \label{fig:amplifier circuit}
+    \end{figure}
+
+    \subsection{Day Four}
+    Modified the car by moving the motors from the middle of the chassis to the bottom of the chassis so that the car can easily go up ramps.
+    Also moved the motor driver from the top of the car to the middle so that the top of the car had space for future components.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{Motors rearrangement.jpg}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{Motor driver rearrangement.jpg}
+        \end{subfigure}
+        \caption{Motors and motor driver rearrangement}
+        \label{fig:motors and driver rearrangement}
+    \end{figure}
+
+    Afterwards continued to work on the light sensor circuit. Modified the circuit from yesterday by adding the comparator section to the breadboard circuit
+    and also cleaned up the wiress. In order to test the circuit first adjusted the potentiometer to the maximum resistance. Then connected the power supply 
+    to the circuit and set it to 5v and 1A. Next covered the photodiode and IR LED with a finger and slowly decreased the resistance of the potentiometer until
+    the green LED turned on. The circuit was now working as intended and it can detect objects that get close to the photodiode.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR breadboard OFF.jpg}
+            \caption{Off state}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR breadboard ON.jpg}
+            \caption{On state}
+        \end{subfigure}
+        \caption{Completed IR sensor on breadboard}
+        \label{fig:IR sensor on breadboard}
+    \end{figure}
+
+    \subsection{Day Five}
+    Inorder to prepare to transfer the IR sensor onto the veroboard, first planned the layout of the components using DIY Layout Creator. Afterwards transferred the
+    components from the breadboard to the veroboard while following the planned layout. Finally inspected all the connections and compared the veroboard circuit to
+    the circuit diagram.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR sensor in diylc.png}
+            \caption{Veroboard in DIY layout creator}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR sensor on veroboard.jpg}
+            \caption{Components transferred to veroboard}
+        \end{subfigure}
+        \caption{Final arrangement on veroboard}
+        \label{fig:IR sensor arrangement on veroboard}
+    \end{figure}
 \end{document}
