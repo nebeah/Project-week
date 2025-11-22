@@ -48,7 +48,7 @@
     \end{figure}
 
     Before testing the circuit using the power supply, tested the design in tinkercad by modelling the circuit and running a simulation.
-    The simulation was a success so connected the terminals of the power supply to the breadboard and set the power supply to output 3v and 0.1A,
+    The simulation was a success so connected the terminals of the power supply to the breadboard and set the power supply to output 3$v$ and 0.1$A$,
     then turned S1 and S3 on. The motor was spinning as expected so turned off S1 and S3, then turned on S2 and S4. The motor started spinning
     in the opposite direction hence the first task was completed.
 
@@ -63,7 +63,7 @@
 
     \subsection{Day Two}
     Connected the wires of the motors to the necessary output terminals of the L298N motor driver. Then connected the battery positive terminal
-    to the 12v terminal of the motor driver and the battery negative terminal to the ground terminal of the motor driver. Afterwards
+    to the 12$v$ terminal of the motor driver and the battery negative terminal to the ground terminal of the motor driver. Afterwards
     made connections between the ground and 5v of the motor driver and the arduino. After that connected the enA and enB terminals on the motor driver
     to the A1 and A2 terminals on the arduino. Then connected in1, in2, in3 and in4 on the motor driver to digital pins 2, 3, 4 and 5 on the arduino respectively.
 
@@ -98,9 +98,10 @@
         \label{fig:ultrasound sensor attached}
     \end{figure}
 
-    Afterwards started to work on the light sensor circuit for project week 2. Followed the circuit diagram and built the amplifier circuit on the breadboard. But
-    during testing there was no output voltage. After inspection found that one of the wires was causing a short circuit so redid the wiring
-    and tested the circuit again. This time the circuit works completely fine and gave an expected output voltage.
+    Afterwards started to work on the light sensor circuit for project week 2. Followed the circuit diagram and built the amplifier circuit on the breadboard
+    using the 390$\Omega$ resistor, IR LED, op-amp IC, 1$M\Omega$ resistor and the photodiode. But during testing there was no output voltage.
+    After inspection found that one of the wires was causing a short circuit so redid the wiring and tested the circuit again. 
+    This time the circuit works completely fine and gave an expected output voltage.
 
     \begin{figure}[h]
         \centering
@@ -126,10 +127,11 @@
         \label{fig:motors and driver rearrangement}
     \end{figure}
 
-    Afterwards continued to work on the light sensor circuit. Modified the circuit from yesterday by adding the comparator section to the breadboard circuit
-    and also cleaned up the wiress. In order to test the circuit first adjusted the potentiometer to the maximum resistance. Then connected the power supply 
-    to the circuit and set it to 5v and 1A. Next covered the photodiode and IR LED with a finger and slowly decreased the resistance of the potentiometer until
-    the green LED turned on. The circuit was now working as intended and it can detect objects that get close to the photodiode.
+    Afterwards continued to work on the light sensor circuit. Modified the circuit from yesterday by adding the comparator section to the breadboard circuit, 
+    this includes adding the potentiometer, 1$k\Omega$ resistor and the green LED and also cleaned up the wiress. In order to test the circuit first adjusted 
+    the potentiometer to the maximum resistance. Then connected the power supply to the circuit and set it to 5$v$ and 1$A$. Next covered the photodiode and IR LED
+    with a finger and slowly decreased the resistance of the potentiometer until the green LED turned on. The circuit was now working as intended
+    and it can detect objects that get close to the photodiode.
 
     \begin{figure}[h]
         \centering
@@ -165,4 +167,84 @@
         \caption{Final arrangement on veroboard}
         \label{fig:IR sensor arrangement on veroboard}
     \end{figure}
+
+    \section{Week Two}
+    \subsection{Day One}
+    Used some tape to hold all the components on the verobaord and began soldering all of the components onto the veroboard. After all the components were soldered,
+    drilled some holes on the veroboard using the hand drill. Afterwards cut off all the excess pins from the verobaord. Then soldered on some header pins so that
+    jumper wires can be connected to provide power, ground and to read the digital output.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{Finished IR sesnor front.jpg}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{Finished IR sensor back.jpg}
+        \end{subfigure}
+        \caption{Finished IR sensor}
+        \label{fig:finished IR}
+    \end{figure}
+
+    Connected the power and ground pins of the sensor to the power supply and set the voltage to 5$v$ and current to 1$A$. The sensor was working as intended since
+    the green LED was lighting up whenever an object comes near the photodiode. Inorder to visualize the output, connected the digital output pin on the sensor to
+    the oscilloscope and it was showing a high value whenever an object is detected and a low value when there is no object.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR sensor high.jpg}
+            \caption{When there is an object}
+        \end{subfigure}
+        \hspace{2cm}
+        \begin{subfigure}[h]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{IR sensor low.jpg}
+            \caption{When there is no output}
+        \end{subfigure}
+        \caption{IR sensor output}
+        \label{fig:IR sensor test}
+    \end{figure}
+
+    \subsection{Day Two}
+    Began to work on displaying the distance on the LCD display. Fisrt attached encoders to the bottom layer of the car. One of the encoders was placed next to the right
+    motor while the other was placed next to the left motor. After that connected the power and ground pins on the encoders to the 5v power and ground on the 
+    arduino using the small breadboard and connected the digital output pins of the encoders to digitsal pins 1 and 2 on the arduino.
+    % include a pic of the encoders and connections
+
+    After that proceeded to write the code to display the distance travelled on the LCD display. First used the encoders to calculate the number of rotations the
+    motors where making, then multiplied the number of rotations by the circumeference of the wheel to get the distance and displayed that value on the LCD. The 
+    circumference was calculated by measuring the diameter which turned to be 66$mm$ and multiplying by $\pi$.
+
+    \subsection{Day Three}
+    Inorder to control the speed of the motors, the enA and enB pins on the motor driver needs to be connected to the PWN pins on the arduino. Since the only available
+    PWM pins are pins 3 and 11, redid the wiring of the components to accommodate for this. The new connections are now enA = 3, in1 = 1, in2 = 2, enB = 11, 
+    in3 = 12, in4 = 13, right encoder = A3, left encoder = A4 % turn this inot a list
+    And also modified the code to match the new connections and added constanr variables to make the code neater. % also add a picture of the new connections
+
+    \subsection{Day Four}
+    Attached the finished IR sensors to the front of the car using some doube sided tape. Connected the power and ground pins of the sensors to the 5$v$ power and ground
+    of the arduino via the small breadboard. Connected the output pins of the right sensor to A1 on the arduino and the left sensor to A2. Turned on the arduino
+    to test if the sensors were working and the LEDs were lighting up as expected. % image of the sensors
+
+    Wrote the code to make the car follow the line by making the car go forward if no line is detected, turing left if the left sensor sees a line and turning right
+    if the right sensor sees a line. On the first attempt the car would only go in a circle regardless of whether or not there is a line.
+    After some troubleshooting, found out that the IR sensor on the left side always gave a LOW output when using digitalRead(). Hence measured the output voltage of
+    both sensors and found that the left side gave an output voltage of around 1.8$v$ and the right side gave an output voltage of around 3$v$ when they were on.
+    So the problem must have been that 1.8$v$ must be too low for digitalRead() to consider it to be on. Therefore we switched to using analogRead() and comparing
+    the output from the sensors to a certain threshold value to determine whether or not the sensor is ON. % add the code snippet of this
+
+    Now the car was following the black line as expected. % include image of the car on the circle
+
+    \subsection{Day Five}
+    Tested the car on the demo track in D block. The car was able to follow the line however it could not make the 90 degree turns. At the 90 degree turns the car goes
+    off track. Hence tried to adjust the turning speed of the car to try and fix the issue. But it was still unable to make 90 degree turns. So modified the line 
+    following code entirely to use a different method. This time instead of turning when a line is detected, the code makes the car turn continuously and swaps the
+    direction whenever a line is detected. Tested this new program on the track. This time the car does manage to finish the track. But it does not manage to stay on the
+    line when making the 90 degree turns, however it does eventually find the line again. So tried to test the car on the track in C block. This time the car 
+    completely deviates from the track when making the 90 degree turn. Tried to fix this by adjusting the speeds and the directions of the motors during the turn, 
+    but it always ends up deviating from the track during the 90 degree turn. After doing some research, found out that digital pin 1 will not work properly if
+    the code uses serial communication. Digital pin 1 is connected to the in1 pin of the motor driver and the program uploaded to the arduino includes a 
+    serial begin line to help with debugging. So removed the serial begin line and reverted the code to use the original line following algorithm. Now the car can
+    finish the track without any issue.
 \end{document}
